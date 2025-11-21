@@ -1,0 +1,387 @@
+/* ============================
+   FUJIFILM XT — STYLESHEET
+   - matches the new index.html structure
+   - shutter intro, red accent ring, warm tones
+   - progressive blur-up + spinner
+   - peek carousel + lightbox styles
+============================ */
+
+/* THEME COLORS */
+:root{
+  --bg-cream: #f6efe6;
+  --brown-dark:#412b23;
+  --brown:#6e4e3e;
+  --film-warm: #d9b48a; /* warm film highlight */
+  --muted:#9a8b7a;
+  --black:#0b0b0b;
+  --glass: rgba(255,255,255,0.08);
+  --accent-red: #d33a2b; /* Fujifilm-style red ring */
+  --shadow: rgba(0,0,0,0.25);
+}
+
+/* GLOBAL */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background: linear-gradient(180deg,var(--bg-cream),#efe8dd);
+  font-family: Inter, system-ui, -apple-system,"Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--black);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ============================
+   INTRO / CAMERA (FUJIFILM XT STYLE)
+============================ */
+
+/* full-screen overlay */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.98) 70%);
+  z-index: 9999;
+  transition: opacity .6s ease;
+  will-change: opacity;
+}
+
+/* center wrapper */
+.camera-wrapper{
+  padding: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* camera body */
+.camera-body{
+  width: 480px;
+  max-width: calc(100% - 48px);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #262424 0%, #171616 100%);
+  padding: 20px 26px;
+  position: relative;
+  color: #eee;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+  border: 2px solid rgba(255,255,255,0.03);
+  box-shadow: 0 30px 90px rgba(0,0,0,0.72);
+  overflow: visible;
+  transform-origin: center;
+}
+
+/* top row: brand + dials */
+.camera-top{
+  grid-column: 1 / -1;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-bottom:6px;
+}
+
+.camera-brand{
+  font-family:'Press Start 2P', monospace;
+  font-size:12px;
+  color:#efe9df;
+  letter-spacing:2px;
+  opacity:.95;
+}
+
+/* dials */
+.camera-dials{ display:flex; gap:10px; align-items:center; }
+.dial{ width:28px; height:28px; border-radius:6px; background: linear-gradient(180deg,#2c2c2c,#111); border:2px solid rgba(255,255,255,0.04); box-shadow: 0 6px 18px rgba(0,0,0,0.45) inset; }
+.dial-2{ width:20px; height:20px; border-radius:5px; transform: rotate(6deg); }
+
+/* camera lens block */
+.camera-lens{
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position: relative;
+  background: radial-gradient(circle at 35% 30%, rgba(60,60,60,0.9), rgba(10,10,10,1));
+  box-shadow: 0 18px 60px rgba(0,0,0,0.68), inset 0 -12px 30px rgba(255,255,255,0.02);
+  border: 6px solid #141414;
+  z-index: 2;
+}
+
+/* metallic ring */
+.lens-metal{
+  position:absolute;
+  width: 92%;
+  height: 92%;
+  border-radius:50%;
+  background: linear-gradient(180deg,#bfb7b0,#8f867f); /* warm metal */
+  box-shadow: 0 2px 18px rgba(0,0,0,0.45) inset, 0 -2px 8px rgba(255,255,255,0.03) inset;
+  transform: scale(.92);
+  z-index: 1;
+}
+
+/* small Fujifilm red accent ring (subtle) */
+.lens-accent{
+  position:absolute;
+  width: 86%;
+  height: 86%;
+  border-radius:50%;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.25), 0 0 0 6px rgba(211,58,43,0.85);
+  transform: scale(.96);
+  mix-blend-mode: overlay;
+  opacity:0.9;
+  z-index: 2;
+  pointer-events:none;
+  filter: saturate(.95) contrast(.95);
+}
+
+/* glass */
+.lens-glass{
+  position:absolute;
+  width:78%;
+  height:78%;
+  border-radius:50%;
+  overflow:hidden;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(circle at 30% 30%, rgba(90,110,150,0.24), rgba(10,12,14,0.72));
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6), inset 0 -10px 30px rgba(255,255,255,0.02);
+  border: 3px solid rgba(255,255,255,0.04);
+}
+
+/* iris */
+.lens-iris{
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, rgba(120,110,110,0.06), rgba(10,10,10,1) 65%);
+  box-shadow: inset 0 8px 40px rgba(0,0,0,0.9);
+  z-index: 4;
+  position: relative;
+}
+
+/* gloss highlight */
+.lens-glass::before{
+  content:"";
+  position:absolute;
+  left:10%;
+  top:8%;
+  width:52%;
+  height:28%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.02));
+  transform: rotate(-18deg);
+  filter: blur(3px);
+  opacity:0.95;
+  z-index:5;
+}
+
+/* minimal shutter button — emoji only */
+.camera-shutter{
+  position:absolute;
+  right:18px;
+  top:14px;
+  background:none;
+  border:none;
+  width:auto;
+  height:auto;
+  padding:0;
+  cursor:pointer;
+  z-index:50;
+
+  /* remove circle shape */
+  border-radius:0;
+  box-shadow:none;
+}
+
+.camera-shutter .shutter-emoji{
+  font-size:28px;     /* slightly larger */
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35));
+  transition: transform .1s ease;
+}
+
+.camera-shutter:active .shutter-emoji{
+  transform: scale(.88);
+}
+
+
+/* caption under camera */
+.camera-caption{
+  grid-column: 1 / -1;
+  color: #e7e2db;
+  font-size:13px;
+  margin-top:8px;
+  text-align:center;
+  opacity:0.95;
+}
+
+/* closing animation (scale + fade) */
+.intro-screen.closing{ opacity:0; pointer-events:none; transition:opacity .62s ease; }
+.intro-screen.closing .camera-body{ animation: camera-close .62s ease forwards; transform-origin:center; }
+
+@keyframes camera-close {
+  0% { transform: scale(1) rotate(0deg); filter:none; }
+  30% { transform: scale(1.06) rotate(-0.6deg); filter: saturate(1.12) brightness(1.06); }
+  60% { transform: scale(.92) rotate(-0.6deg); filter: blur(.6px) brightness(.98); opacity:0.95; }
+  100% { transform: scale(.98) rotate(0deg); opacity:0; filter: blur(1px); }
+}
+
+/* ============================
+   SITE FRAME & LAYOUT
+============================ */
+.frame{
+  width:1100px;
+  max-width:calc(100% - 40px);
+  border:8px solid var(--brown-dark);
+  border-radius:12px;
+  background:var(--bg-cream);
+  box-shadow:0 12px 40px var(--shadow);
+  overflow:hidden;
+  transition:opacity .45s ease, transform .45s ease, filter .45s ease;
+}
+
+.frame.site-hidden{ opacity:0; pointer-events:none; transform:scale(.996); filter: blur(2px) brightness(.9); }
+.frame.revealed{ opacity:1; pointer-events:auto; transform:scale(1); filter: blur(0) brightness(1); }
+
+.site-header{
+  display:flex; justify-content:space-between; align-items:center; padding:18px 28px;
+  background: linear-gradient(90deg,var(--brown-dark),#35221c);
+  color:var(--bg-cream);
+}
+.logo{ font-family:'Press Start 2P', monospace; font-size:14px; letter-spacing:2px; }
+.nav a{ color:var(--bg-cream); text-decoration:none; margin-left:18px; font-size:13px; }
+.nav a:hover{text-decoration:underline}
+
+.container{ padding:28px 36px; max-height:calc(100vh - 160px); overflow:auto; }
+
+/* HERO */
+.hero{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin-bottom:20px; }
+.hero-title{ font-family:'Press Start 2P', monospace; font-size:34px; margin:0; color:var(--brown-dark); }
+.hero-sub{ margin:0; color:var(--muted); }
+
+/* ABOUT */
+.about{ background: rgba(255,255,255,0.6); padding:18px; border-radius:10px; margin-bottom:20px; }
+.about-card{ display:flex; gap:18px; align-items:center; }
+.profile-frame{ position:relative; width:120px; height:140px; display:block; }
+.profile-frame .spinner{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:5; }
+.profile-pic{ width:100px; height:120px; object-fit:cover; border-radius:8px; border:4px solid var(--brown); background:#e6d7cc; display:block; }
+.about-text h2{ font-family:'Press Start 2P', monospace; font-size:15px; margin-bottom:8px; }
+.about-text p{ color:var(--black); margin-bottom:10px; }
+.meta{ list-style:none; padding:0; margin:0; color:var(--muted); font-size:13px; }
+
+/* SECTION TITLE */
+.section-title{ font-family:'Press Start 2P', monospace; margin:12px 0 10px; font-size:16px; color:var(--brown-dark); }
+
+/* ============================
+   CAROUSEL (PEEK STYLE)
+============================ */
+.carousel-section{ margin:20px 0; }
+.carousel{ display:flex; align-items:center; gap:12px; position:relative; }
+.carousel-track-wrapper{ width:100%; max-width:900px; overflow:hidden; border-radius:8px; }
+.carousel-track{ display:flex; gap:14px; transition:transform .45s ease; padding:10px 6px; align-items:center; }
+.slide{ min-width:78%; position:relative; flex:0 0 78%; border-radius:8px; overflow:hidden; background:#111; display:block; }
+.slide .spinner{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:6; background: rgba(0,0,0,0.02); }
+.slide img{ width:100%; height:460px; object-fit:cover; display:block; border-radius:8px; transition: transform .35s ease, filter .35s ease; }
+.slide img:hover{ transform:scale(1.03); }
+
+/* carousel controls */
+.carousel-btn{ background:var(--brown-dark); color:var(--bg-cream); border:none; padding:10px 12px; border-radius:6px; cursor:pointer; }
+.dots{ position:absolute; right:14px; bottom:12px; display:flex; gap:6px; }
+.dots button{ width:10px; height:10px; border-radius:50%; border:none; opacity:0.36; background:#fff; }
+.dots button.active{ opacity:1; transform:scale(1.1); }
+
+/* ============================
+   GALLERY GRID
+============================ */
+.gallery .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.grid-item{ overflow:hidden; border-radius:8px; cursor:pointer; background:#f2efe9; position:relative; }
+.grid-item .spinner{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:6; background: rgba(255,255,255,0.02); }
+.grid-item img{ width:100%; height:200px; object-fit:cover; display:block; transition: transform .25s ease, box-shadow .25s ease; }
+.grid-item img:hover{ transform:scale(1.04); box-shadow:0 12px 30px rgba(0,0,0,0.18); }
+
+/* ============================
+   LIGHTBOX
+============================ */
+.lightbox{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; gap:20px; background:rgba(0,0,0,0.9); z-index:10010; padding:20px; }
+.lightbox.hide{ display:none; }
+.lightbox-stage{ max-width:1200px; max-height:85vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
+.lightbox-stage img{ max-width:100%; max-height:80vh; border-radius:8px; object-fit:contain; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+.lightbox-close, .lightbox-prev, .lightbox-next{ background:transparent; border:none; color:#fff; font-size:20px; cursor:pointer; padding:8px; }
+.lightbox-close{ position:absolute; right:18px; top:18px; font-size:22px; }
+
+/* ============================
+   PROGRESSIVE BLUR-UP + SPINNER
+============================ */
+/* spinner (simple circular) */
+.spinner{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,0.08);
+  border-top-color: rgba(255,255,255,0.28);
+  animation: spin .9s linear infinite;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+/* progressive placeholder -> final */
+.progressive{ filter: blur(10px) saturate(.9) contrast(.95); transform-origin:center; transition: filter .6s ease, opacity .4s ease, transform .45s ease; opacity: .96; }
+.progressive.loaded{ filter: blur(0) saturate(1) contrast(1); opacity:1; transform:none; }
+
+/* hide spinner when loaded - JS will toggle .loaded on img and hide next sibling spinner */
+.progressive.loaded + .spinner,
+.progressive.loaded ~ .spinner{ display:none !important; }
+
+/* CONTACT CARD */
+.contact{ margin-top:20px; padding:14px; background:rgba(255,255,255,0.55); border-radius:10px; }
+.bizcard-simple{ background:var(--bg-cream); border:2px solid var(--brown); padding:24px 28px; border-radius:14px; display:flex; justify-content:space-between; align-items:flex-start; gap:28px; box-shadow:0 8px 24px rgba(0,0,0,0.18); transition: transform .25s ease, box-shadow .25s ease; }
+.bizcard-simple:hover{ transform:translateY(-3px); box-shadow:0 14px 40px rgba(0,0,0,0.28); }
+.biz-left{ display:flex; flex-direction:column; gap:4px; }
+.biz-name{ font-size:22px; font-weight:700; color:var(--brown-dark); }
+.biz-role{ font-size:14px; color:var(--muted); }
+.biz-right{ display:flex; flex-direction:column; gap:14px; min-width:320px; }
+.biz-item{ display:flex; flex-direction:column; gap:2px; }
+.biz-label{ font-family:'Press Start 2P', monospace; font-size:11px; color:var(--brown-dark); background:rgba(110,78,62,0.12); padding:4px 6px; border-radius:6px; width:fit-content; }
+.biz-info{ font-size:15px; color:var(--black); text-decoration:none; transition: .2s ease; }
+.biz-info:hover{ opacity:.7; transform: translateX(3px); }
+.contact-note{ margin-top:14px; font-size:13px; color:var(--muted); font-style:italic; }
+
+/* FOOTER */
+.site-footer{ display:flex; justify-content:space-between; padding:12px 28px; background:#2f2220; color:var(--bg-cream); font-size:12px; }
+
+/* RESPONSIVE */
+@media (max-width:1000px){
+  .carousel-track{ gap:10px; padding:8px; }
+  .slide img{ height:320px; }
+  .slide{ min-width:84%; }
+  .gallery .grid{ grid-template-columns:repeat(2,1fr); }
+  .profile-pic{ width:120px; height:140px; }
+  .camera-body{ width:360px; }
+  .camera-lens{ width:160px; height:160px; }
+  .lens-accent{ opacity: .8; }
+}
+@media (max-width:620px){
+  .nav{ display:none; }
+  .frame{ width:100%; padding:0; }
+  .hero-title{ font-size:22px; }
+  .slide img{ height:220px; }
+  .slide{ min-width:92%; }
+  .camera-body{ width:300px; padding:16px; border-radius:12px; }
+  .camera-lens{ width:140px; height:140px; }
+  .camera-shutter{ width:48px; height:48px; right:12px; top:10px; }
+}
+
+/* UTILITIES */
+.visually-hidden{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.hide{ display:none; }

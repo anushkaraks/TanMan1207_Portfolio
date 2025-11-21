@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tanmay N | Photography Portfolio</title>
+  <meta name="description" content="Portfolio of Tanmay N">
+
+  <!-- Pixel Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- Styles (replace with final CSS file you'll receive next) -->
+  <link rel="stylesheet" href="stylesss.css">
+</head>
+
+<body>
+  <!-- ============================
+       FUJIFILM-STYLE CAMERA INTRO
+       - smooth lens zoom
+       - red accent ring
+       - plays shutter sound at /mnt/data/shutter.wav
+  ================================ -->
+  <div class="intro-screen" id="intro" role="dialog" aria-label="Open website" aria-hidden="false">
+    <div class="camera-wrapper" aria-hidden="true">
+      <div class="camera-body" id="cameraBody" role="button" tabindex="0" aria-label="Open site (camera)">
+        <div class="camera-top">
+          <div class="camera-brand">TANMAY</div>
+          <div class="camera-dials">
+            <div class="dial dial-1" aria-hidden="true"></div>
+            <div class="dial dial-2" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="camera-lens" aria-hidden="true">
+          <div class="lens-metal"></div>
+
+          <!-- red accent ring (Fujifilm-inspired) -->
+          <div class="lens-accent"></div>
+
+          <div class="lens-glass">
+            <div class="lens-iris"></div>
+          </div>
+        </div>
+
+        <button class="camera-shutter" id="cameraShutter" aria-label="Press shutter to open site" title="Open site!!!">
+          <span class="shutter-emoji">📸</span>
+        </button>
+
+        <div class="camera-caption">Click the emoji to be transported into a world of magic!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio (local generated shutter) -->
+    <audio id="shutterSound" src="sounds/shutter.mp3" preload="auto"></audio>
+
+  <!-- ============================
+       MAIN SITE (hidden until intro)
+  ================================ -->
+  <div class="frame site-hidden" id="site" aria-hidden="true">
+
+    <!-- Header -->
+    <header class="site-header" id="top">
+      <div class="logo" aria-hidden="true">TANMAY N</div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#best">Best Works</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="container" id="mainContent">
+
+      <!-- Hero -->
+      <section class="hero" id="hero" aria-labelledby="heroTitle">
+        <h1 id="heroTitle" class="hero-title">Frames of the Moment</h1>
+        <p class="hero-sub">More than simple photographs • Visual storytelling</p>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="about" aria-labelledby="aboutTitle">
+        <h2 id="aboutTitle" class="section-title visually-hidden">About</h2>
+
+        <div class="about-card">
+          <div class="profile-frame">
+            <!-- spinner shown while loading, JS will hide when loaded -->
+            <div class="spinner" aria-hidden="true"></div>
+            <img class="profile-pic progressive" src="images/profile-small.jpg" data-src="images/profile.jpg" alt="Tanmay profile" loading="lazy" width="240" height="288">
+          </div>
+
+          <div class="about-text">
+            <h2>About Me</h2>
+            <p>
+              I’m Tanmay N, a second-year Engineering Physics student at IIT Guwahati and a photographer who loves capturing the beauty hidden in everyday moments. For me, photography is more than just taking pictures. It’s a way to freeze emotions, tell stories, and preserve the small details that often go unnoticed.
+            </p>
+
+            <ul class="meta">
+              <li>Location: Guwahati / Bengaluru</li>
+              <li>Specialties: Photography, being a cool guy ;)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Best Works (peek carousel) -->
+      <section id="best" class="carousel-section" aria-labelledby="bestTitle">
+        <h2 id="bestTitle" class="section-title">Best Works</h2>
+
+        <div class="carousel" aria-label="Best works carousel">
+          <button class="carousel-btn prev" aria-label="Previous slide">◀</button>
+
+          <div class="carousel-track-wrapper">
+            <ul class="carousel-track" role="list">
+              <li class="slide" role="listitem">
+                <div class="spinner" aria-hidden="true"></div>
+                <img class="progressive" src="images/work1-small.jpg" data-src="images/work1.jpg" alt="Work 1" loading="lazy">
+              </li>
+              <li class="slide" role="listitem">
+                <div class="spinner" aria-hidden="true"></div>
+                <img class="progressive" src="images/work2-small.jpg" data-src="images/work2.jpg" alt="Work 2" loading="lazy">
+              </li>
+              <li class="slide" role="listitem">
+                <div class="spinner" aria-hidden="true"></div>
+                <img class="progressive" src="images/work3-small.jpg" data-src="images/work3.jpg" alt="Work 3" loading="lazy">
+              </li>
+              <li class="slide" role="listitem">
+                <div class="spinner" aria-hidden="true"></div>
+                <img class="progressive" src="images/work4-small.jpg" data-src="images/work4.jpg" alt="Work 4" loading="lazy">
+              </li>
+              <li class="slide" role="listitem">
+                <div class="spinner" aria-hidden="true"></div>
+                <img class="progressive" src="images/work5-small.jpg" data-src="images/work5.jpg" alt="Work 5" loading="lazy">
+              </li>
+            </ul>
+          </div>
+
+          <button class="carousel-btn next" aria-label="Next slide">▶</button>
+          <div class="dots" role="tablist" aria-label="Carousel pagination"></div>
+        </div>
+      </section>
+
+      <!-- Gallery (grid -> lightbox) -->
+      <section id="gallery" class="gallery" aria-labelledby="galleryTitle">
+        <h2 id="galleryTitle" class="section-title">Gallery</h2>
+
+        <div class="grid" role="list">
+          <div class="grid-item" role="listitem">
+            <div class="spinner" aria-hidden="true"></div>
+            <img class="progressive lightbox-target" src="images/gallery1-small.jpg" data-src="images/gallery1.jpg" alt="Gallery photo 1" loading="lazy">
+          </div>
+          <div class="grid-item" role="listitem">
+            <div class="spinner" aria-hidden="true"></div>
+            <img class="progressive lightbox-target" src="images/gallery2-small.jpg" data-src="images/gallery2.jpg" alt="Gallery photo 2" loading="lazy">
+          </div>
+          <div class="grid-item" role="listitem">
+            <div class="spinner" aria-hidden="true"></div>
+            <img class="progressive lightbox-target" src="images/gallery3-small.jpg" data-src="images/gallery3.jpg" alt="Gallery photo 3" loading="lazy">
+          </div>
+          <div class="grid-item" role="listitem">
+            <div class="spinner" aria-hidden="true"></div>
+            <img class="progressive lightbox-target" src="images/gallery4-small.jpg" data-src="images/gallery4.jpg" alt="Gallery photo 4" loading="lazy">
+          </div>
+          <div class="grid-item" role="listitem">
+            <div class="spinner" aria-hidden="true"></div>
+            <img class="progressive lightbox-target" src="images/gallery5-small.jpg" data-src="images/gallery5.jpg" alt="Gallery photo 5" loading="lazy">
+          </div>
+          <div class="grid-item" role="listitem">
+            <div class="spinner" aria-hidden="true"></div>
+            <img class="progressive lightbox-target" src="images/gallery6-small.jpg" data-src="images/gallery6.jpg" alt="Gallery photo 6" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="contact" aria-labelledby="contactTitle">
+        <h2 id="contactTitle" class="section-title">Contact</h2>
+
+        <div class="bizcard-simple">
+          <div class="biz-left">
+            <div class="biz-name">Tanmay N</div>
+            <div class="biz-role">Engineering Physics @ IIT Guwahati</div>
+            <div class="biz-description">Open for collaborations, creative projects, and conversations over photography.</div>
+            <div class="biz-description">Let’s create something meaningful together.</div>
+          </div>
+
+          <div class="biz-right">
+            <div class="biz-item">
+              <span class="biz-label">Email</span>
+              <a href="mailto:t4nm4ybly@gmail.com" class="biz-info">t4nm4ybly@gmail.com</a>
+            </div>
+
+            <div class="biz-item">
+              <span class="biz-label">Instagram</span>
+              <a href="https://instagram.com/tanmayyyyy.n" target="_blank" rel="noopener" class="biz-info">@tanmayyyyy.n</a>
+            </div>
+
+            <div class="biz-item">
+              <span class="biz-label">LinkedIn</span>
+              <a href="https://www.linkedin.com/in/tanmay-n-b17b382b8" target="_blank" rel="noopener" class="biz-info">LinkedIn Profile</a>
+            </div>
+
+            <div class="biz-item">
+              <span class="biz-label">Location</span>
+              <span class="biz-info">IIT Guwahati, Assam</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" role="contentinfo">
+      <div>© <span id="year"></span> Tanmay N. All rights reserved.</div>
+
+      <div class="socials">
+        <a href="https://instagram.com/tanmayyyyy.n" target="_blank" rel="noopener">Instagram</a> |
+        <a href="https://www.linkedin.com/in/tanmay-n-b17b382b8" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- LIGHTBOX (single element reused for all images) -->
+  <div class="lightbox hide" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Close (Esc)">✕</button>
+    <button class="lightbox-prev" aria-label="Previous">◀</button>
+    <div class="lightbox-stage">
+      <img src="" alt="" id="lightboxImg">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+    <button class="lightbox-next" aria-label="Next">▶</button>
+  </div>
+
+  <!-- Scripts (final script.js coming next) -->
+  <script src="script.js" defer></script>
+</body>
+</html>
