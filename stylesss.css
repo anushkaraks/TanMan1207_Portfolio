@@ -1,25 +1,16 @@
-/* ============================
-   FUJIFILM XT — STYLESHEET
-   - matches the new index.html structure
-   - shutter intro, red accent ring, warm tones
-   - progressive blur-up + spinner
-   - peek carousel + lightbox styles
-============================ */
 
-/* THEME COLORS */
 :root{
   --bg-cream: #f6efe6;
   --brown-dark:#412b23;
   --brown:#6e4e3e;
-  --film-warm: #d9b48a; /* warm film highlight */
+  --film-warm: #d9b48a; 
   --muted:#9a8b7a;
   --black:#0b0b0b;
   --glass: rgba(255,255,255,0.08);
-  --accent-red: #d33a2b; /* Fujifilm-style red ring */
+  --accent-red: #d33a2b; 
   --shadow: rgba(0,0,0,0.25);
 }
 
-/* GLOBAL */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -35,11 +26,6 @@ body{
   -moz-osx-font-smoothing:grayscale;
 }
 
-/* ============================
-   INTRO / CAMERA (FUJIFILM XT STYLE)
-============================ */
-
-/* full-screen overlay */
 .intro-screen {
   position: fixed;
   inset: 0;
@@ -52,7 +38,6 @@ body{
   will-change: opacity;
 }
 
-/* center wrapper */
 .camera-wrapper{
   padding: 18px;
   display:flex;
@@ -60,7 +45,6 @@ body{
   justify-content:center;
 }
 
-/* camera body */
 .camera-body{
   width: 480px;
   max-width: calc(100% - 48px);
@@ -80,7 +64,6 @@ body{
   transform-origin: center;
 }
 
-/* top row: brand + dials */
 .camera-top{
   grid-column: 1 / -1;
   width:100%;
@@ -98,12 +81,10 @@ body{
   opacity:.95;
 }
 
-/* dials */
 .camera-dials{ display:flex; gap:10px; align-items:center; }
 .dial{ width:28px; height:28px; border-radius:6px; background: linear-gradient(180deg,#2c2c2c,#111); border:2px solid rgba(255,255,255,0.04); box-shadow: 0 6px 18px rgba(0,0,0,0.45) inset; }
 .dial-2{ width:20px; height:20px; border-radius:5px; transform: rotate(6deg); }
 
-/* camera lens block */
 .camera-lens{
   width: 240px;
   height: 240px;
@@ -118,7 +99,6 @@ body{
   z-index: 2;
 }
 
-/* metallic ring */
 .lens-metal{
   position:absolute;
   width: 92%;
@@ -130,7 +110,6 @@ body{
   z-index: 1;
 }
 
-/* small Fujifilm red accent ring (subtle) */
 .lens-accent{
   position:absolute;
   width: 86%;
@@ -145,7 +124,6 @@ body{
   filter: saturate(.95) contrast(.95);
 }
 
-/* glass */
 .lens-glass{
   position:absolute;
   width:78%;
@@ -161,7 +139,6 @@ body{
   border: 3px solid rgba(255,255,255,0.04);
 }
 
-/* iris */
 .lens-iris{
   width: 70%;
   height: 70%;
@@ -172,7 +149,6 @@ body{
   position: relative;
 }
 
-/* gloss highlight */
 .lens-glass::before{
   content:"";
   position:absolute;
@@ -187,7 +163,6 @@ body{
   z-index:5;
 }
 
-/* minimal shutter button — emoji only */
 .camera-shutter{
   position:absolute;
   right:18px;
@@ -199,8 +174,6 @@ body{
   padding:0;
   cursor:pointer;
   z-index:50;
-
-  /* remove circle shape */
   border-radius:0;
   box-shadow:none;
 }
@@ -216,7 +189,6 @@ body{
 }
 
 
-/* caption under camera */
 .camera-caption{
   grid-column: 1 / -1;
   color: #e7e2db;
@@ -225,8 +197,6 @@ body{
   text-align:center;
   opacity:0.95;
 }
-
-/* closing animation (scale + fade) */
 .intro-screen.closing{ opacity:0; pointer-events:none; transition:opacity .62s ease; }
 .intro-screen.closing .camera-body{ animation: camera-close .62s ease forwards; transform-origin:center; }
 
@@ -237,9 +207,6 @@ body{
   100% { transform: scale(.98) rotate(0deg); opacity:0; filter: blur(1px); }
 }
 
-/* ============================
-   SITE FRAME & LAYOUT
-============================ */
 .frame{
   width:1100px;
   max-width:calc(100% - 40px);
@@ -265,12 +232,11 @@ body{
 
 .container{ padding:28px 36px; max-height:calc(100vh - 160px); overflow:auto; }
 
-/* HERO */
+
 .hero{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin-bottom:20px; }
 .hero-title{ font-family:'Press Start 2P', monospace; font-size:34px; margin:0; color:var(--brown-dark); }
 .hero-sub{ margin:0; color:var(--muted); }
 
-/* ABOUT */
 .about{ background: rgba(255,255,255,0.6); padding:18px; border-radius:10px; margin-bottom:20px; }
 .about-card{ display:flex; gap:18px; align-items:center; }
 .profile-frame{ position:relative; width:120px; height:140px; display:block; }
@@ -280,12 +246,9 @@ body{
 .about-text p{ color:var(--black); margin-bottom:10px; }
 .meta{ list-style:none; padding:0; margin:0; color:var(--muted); font-size:13px; }
 
-/* SECTION TITLE */
 .section-title{ font-family:'Press Start 2P', monospace; margin:12px 0 10px; font-size:16px; color:var(--brown-dark); }
 
-/* ============================
-   CAROUSEL (PEEK STYLE)
-============================ */
+
 .carousel-section{ margin:20px 0; }
 .carousel{ display:flex; align-items:center; gap:12px; position:relative; }
 .carousel-track-wrapper{ width:100%; max-width:900px; overflow:hidden; border-radius:8px; }
@@ -295,24 +258,20 @@ body{
 .slide img{ width:100%; height:460px; object-fit:cover; display:block; border-radius:8px; transition: transform .35s ease, filter .35s ease; }
 .slide img:hover{ transform:scale(1.03); }
 
-/* carousel controls */
+
 .carousel-btn{ background:var(--brown-dark); color:var(--bg-cream); border:none; padding:10px 12px; border-radius:6px; cursor:pointer; }
 .dots{ position:absolute; right:14px; bottom:12px; display:flex; gap:6px; }
 .dots button{ width:10px; height:10px; border-radius:50%; border:none; opacity:0.36; background:#fff; }
 .dots button.active{ opacity:1; transform:scale(1.1); }
 
-/* ============================
-   GALLERY GRID
-============================ */
+
 .gallery .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
 .grid-item{ overflow:hidden; border-radius:8px; cursor:pointer; background:#f2efe9; position:relative; }
 .grid-item .spinner{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:6; background: rgba(255,255,255,0.02); }
 .grid-item img{ width:100%; height:200px; object-fit:cover; display:block; transition: transform .25s ease, box-shadow .25s ease; }
 .grid-item img:hover{ transform:scale(1.04); box-shadow:0 12px 30px rgba(0,0,0,0.18); }
 
-/* ============================
-   LIGHTBOX
-============================ */
+
 .lightbox{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; gap:20px; background:rgba(0,0,0,0.9); z-index:10010; padding:20px; }
 .lightbox.hide{ display:none; }
 .lightbox-stage{ max-width:1200px; max-height:85vh; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
@@ -320,10 +279,6 @@ body{
 .lightbox-close, .lightbox-prev, .lightbox-next{ background:transparent; border:none; color:#fff; font-size:20px; cursor:pointer; padding:8px; }
 .lightbox-close{ position:absolute; right:18px; top:18px; font-size:22px; }
 
-/* ============================
-   PROGRESSIVE BLUR-UP + SPINNER
-============================ */
-/* spinner (simple circular) */
 .spinner{
   width:42px;
   height:42px;
@@ -335,15 +290,12 @@ body{
 }
 @keyframes spin{ to{ transform: rotate(360deg); } }
 
-/* progressive placeholder -> final */
 .progressive{ filter: blur(10px) saturate(.9) contrast(.95); transform-origin:center; transition: filter .6s ease, opacity .4s ease, transform .45s ease; opacity: .96; }
 .progressive.loaded{ filter: blur(0) saturate(1) contrast(1); opacity:1; transform:none; }
 
-/* hide spinner when loaded - JS will toggle .loaded on img and hide next sibling spinner */
 .progressive.loaded + .spinner,
 .progressive.loaded ~ .spinner{ display:none !important; }
 
-/* CONTACT CARD */
 .contact{ margin-top:20px; padding:14px; background:rgba(255,255,255,0.55); border-radius:10px; }
 .bizcard-simple{ background:var(--bg-cream); border:2px solid var(--brown); padding:24px 28px; border-radius:14px; display:flex; justify-content:space-between; align-items:flex-start; gap:28px; box-shadow:0 8px 24px rgba(0,0,0,0.18); transition: transform .25s ease, box-shadow .25s ease; }
 .bizcard-simple:hover{ transform:translateY(-3px); box-shadow:0 14px 40px rgba(0,0,0,0.28); }
@@ -357,10 +309,8 @@ body{
 .biz-info:hover{ opacity:.7; transform: translateX(3px); }
 .contact-note{ margin-top:14px; font-size:13px; color:var(--muted); font-style:italic; }
 
-/* FOOTER */
 .site-footer{ display:flex; justify-content:space-between; padding:12px 28px; background:#2f2220; color:var(--bg-cream); font-size:12px; }
 
-/* RESPONSIVE */
 @media (max-width:1000px){
   .carousel-track{ gap:10px; padding:8px; }
   .slide img{ height:320px; }
@@ -382,6 +332,6 @@ body{
   .camera-shutter{ width:48px; height:48px; right:12px; top:10px; }
 }
 
-/* UTILITIES */
 .visually-hidden{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
 .hide{ display:none; }
+
