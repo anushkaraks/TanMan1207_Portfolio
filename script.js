@@ -1,25 +1,8 @@
-/* ==========================================================
-   FINAL script.js — Fujifilm XT Edition
-   - camera intro with shutter sound + close animation
-   - lazy-load blur-up with spinner auto-hide
-   - peek carousel (auto + dots + keyboard)
-   - gallery → lightbox
-   - smooth scrolling + scroll reveal
-   ========================================================== */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ------------------------------
-     FOOTER YEAR
-  ------------------------------ */
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-
-
-  /* ------------------------------
-     FUJIFILM CAMERA INTRO
-  ------------------------------ */
   const intro = document.getElementById("intro");
   const shutterBtn = document.getElementById("cameraShutter");
   const site = document.getElementById("site");
@@ -29,13 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function revealSite() {
     if (!intro || !site) return;
 
-    // Play shutter sound
     if (shutterSound) {
       shutterSound.currentTime = 0;
       shutterSound.play().catch(() => {});
     }
 
-    // Trigger camera shrink → fade animation
     intro.classList.add("closing");
 
     setTimeout(() => {
@@ -44,10 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
       site.classList.add("revealed");
       site.setAttribute("aria-hidden", "false");
 
-      // Keyboard friendliness
       const firstLink = document.querySelector(".nav a");
       if (firstLink) firstLink.focus();
-    }, 620); // matches CSS animation
+    }, 620); 
   }
 
   if (shutterBtn) {
@@ -61,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Escape key also reveals site
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && intro && !site.classList.contains("revealed")) {
       revealSite();
@@ -69,11 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-
-  /* ------------------------------
-     PROGRESSIVE BLUR-UP IMAGES
-     + spinner removal
-  ------------------------------ */
   const progressiveImgs = document.querySelectorAll("img.progressive");
 
   if ("IntersectionObserver" in window) {
@@ -84,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const img = entry.target;
         const highSrc = img.dataset.src;
 
-        // spinner located beside image
         const spinner = img.parentElement.querySelector(".spinner");
 
         if (highSrc) {
@@ -114,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     progressiveImgs.forEach((img) => observer.observe(img));
   } else {
-    // no observer → reveal instantly
     progressiveImgs.forEach((img) => {
       const spinner = img.parentElement.querySelector(".spinner");
       if (img.dataset.src) img.src = img.dataset.src;
@@ -124,10 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-
-  /* ------------------------------
-     CAROUSEL — PEEK STYLE
-  ------------------------------ */
   (function initCarousel() {
     const track = document.querySelector(".carousel-track");
     const wrapper = document.querySelector(".carousel-track-wrapper");
@@ -139,9 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const dotsWrap = document.querySelector(".dots");
 
     let index = 0;
-    const gap = 14; // match CSS gap
+    const gap = 14; 
 
-    // Build dots
+
     slides.forEach((_, i) => {
       const dot = document.createElement("button");
       dot.setAttribute("aria-label", `Slide ${i + 1}`);
@@ -189,13 +157,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.addEventListener("resize", () => setTimeout(update, 120));
 
-    // keyboard control
     window.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     });
 
-    // slides → lightbox
     slides.forEach((slide, i) => {
       const img = slide.querySelector("img");
       if (img) img.addEventListener("click", () => {
@@ -208,10 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
 
-
-  /* ------------------------------
-     LIGHTBOX
-  ------------------------------ */
   const lb = document.getElementById("lightbox");
   const lbImg = document.getElementById("lightboxImg");
   const lbCap = document.getElementById("lightboxCaption");
@@ -243,7 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function nextLB() { lbIndex = (lbIndex + 1) % lbList.length; renderLB(); }
   function prevLB() { lbIndex = (lbIndex - 1 + lbList.length) % lbList.length; renderLB(); }
 
-  // gallery images
   const galleryImgs = [...document.querySelectorAll(".lightbox-target")];
   if (galleryImgs.length) {
     const srcList = galleryImgs.map(img => img.dataset.src || img.src);
@@ -256,7 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (lbNext) lbNext.addEventListener("click", nextLB);
   if (lbPrev) lbPrev.addEventListener("click", prevLB);
 
-  // keyboard control
   window.addEventListener("keydown", (e) => {
     if (lb.classList.contains("hide")) return;
     if (e.key === "Escape") closeLB();
@@ -264,16 +224,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "ArrowLeft") prevLB();
   });
 
-  // outside click closes
   lb.addEventListener("click", (e) => {
     if (e.target === lb) closeLB();
   });
 
 
-
-  /* ------------------------------
-     SMOOTH SCROLL
-  ------------------------------ */
   document.querySelectorAll(".nav a").forEach((a) => {
     a.addEventListener("click", (e) => {
       e.preventDefault();
@@ -283,10 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-
-  /* ------------------------------
-     SCROLL REVEAL
-  ------------------------------ */
   if ("IntersectionObserver" in window) {
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
@@ -307,3 +258,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
